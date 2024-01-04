@@ -5,8 +5,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
 import com.crm.ObjectRepository.Homepage;
 import com.crm.ObjectRepository.LoginPage;
@@ -15,7 +17,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 	
-	public DataBaseUtility dlib= new DataBaseUtility();
+	public DataBaseUtility dlib = new DataBaseUtility();
 	public ExcelUtility elib = new ExcelUtility();
 	public FileUtility flib = new 	FileUtility();
 	public JavaUtility jlib = new JavaUtility();
@@ -26,20 +28,19 @@ public class BaseClass {
 	/*@BeforeSuite(alwaysRun = true)
 	public void config_Bs() throws Throwable 
 	{
-		dlib.connectToDB();
+		dlib.connectToDb();
 		System.out.println("-----connect to DataBase-------");
 		
 	}*/
     
 	//@Parameters( "BROWSER")
-	//@BeforeClass(alwaysRun = true)
 	@BeforeClass(alwaysRun = true)
 	public void config_BC() throws Throwable {
 		String BROWSER = flib.ReadDataFromPropertyFile("Browser");
 		
 		if(BROWSER.equalsIgnoreCase("chrome"))
 		{
-			WebDriverManager.chromedriver().setup();
+			System.setProperty("webdriver.chrome.driver","./src/main/resources/chromedriver.exe");
 			driver= new ChromeDriver();
 		}
 		else
@@ -75,13 +76,13 @@ public class BaseClass {
 	
 	@AfterClass(alwaysRun = true)
 	public void config_AC() {
-		driver.quit();
+		driver.close();
 		System.out.println("---------Close the browser-------");
 	}
 	
 	/*@AfterSuite(alwaysRun = true)
 	public void config_AS() throws Throwable {
-		dlib.CloseDb();
+		dlib.disConnectFromDb();
 		System.out.println("-----Close DataBase connection------");
 	}*/
 }

@@ -22,7 +22,8 @@ public class ExcelUtility {
 	public String readDataFromExcel(String SheetName,int Rowno,int Cellno) throws Throwable {
 		FileInputStream fi = new FileInputStream(IPathconstants.ExcelPath);
 		Workbook wb = WorkbookFactory.create(fi);
-		String value = wb.getSheet(SheetName).getRow(Rowno).getCell(Cellno).getStringCellValue();
+		Sheet sh = wb.getSheet(SheetName);
+		String value=sh.getRow(Rowno).getCell(Cellno).getStringCellValue();
 		return value;
 	}
 	
@@ -33,13 +34,15 @@ public class ExcelUtility {
 	 * @param data
 	 * @throws Throwable
 	 */
-	public void writedatatoexcel(String SheetName,String data) throws Throwable {
+	public void writedatatoexcel(String SheetName,int rindex,int colindex,String data) throws Throwable {
+		
 		//Create excel sheet
 		FileInputStream fi = new FileInputStream(IPathconstants.ExcelPath);
 		Workbook wb = WorkbookFactory.create(fi);
 		Sheet sh =wb.createSheet(SheetName);
+		
 		//write data into excelsheet 
-		sh.createRow(0).createCell(0).setCellValue(data);
+		sh.createRow(rindex).createCell(colindex).setCellValue(data);
 		
 		FileOutputStream fos = new FileOutputStream(IPathconstants.ExcelPath);
 		wb.write(fos);
@@ -76,7 +79,7 @@ public class ExcelUtility {
 		//fetching data from excel
 		FileInputStream fi = new FileInputStream(IPathconstants.ExcelPath);
 		Workbook wb = WorkbookFactory.create(fi);
-		Sheet sh =wb.createSheet(SheetName);
+		Sheet sh =wb.getSheet(SheetName);
 		int count =sh.getLastRowNum();
 		
 		//creating an empty Hashmap 
@@ -98,7 +101,7 @@ public class ExcelUtility {
 		Workbook wb = WorkbookFactory.create(fi);
 		Sheet sh = wb.getSheet(SheetName);
 		int lastrow = sh.getLastRowNum();
-		int lastcell=sh.getRow(0).getLastCellNum();
+		int lastcell=sh.getRow(lastrow).getLastCellNum();
 		
 		Object[][] obj = new Object[lastrow+1][lastcell];
 		for (int i = 0; i<=lastrow; i++) {

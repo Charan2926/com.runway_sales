@@ -25,6 +25,7 @@ public class BrokenLinksAPSTRCTest {
 		//Launch the application
 		driver.get("https://apsrtclivetrack.com/#/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
 		List<WebElement> linkslist =driver.findElements(By.xpath("//a"));
 		System.out.println(linkslist.size());
 		

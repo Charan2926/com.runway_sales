@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -43,8 +44,10 @@ public class Creating_Monthly_ToDo_All_DataTest {
 		//String duedate =sh.getRow(5).getCell(1).getStringCellValue();
 		
 		//launching browsers and appliction
-		WebDriverManager.chromedriver().setup();
-		WebDriver driver = new ChromeDriver();	
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--remote-allow-origins=*");
+		System.setProperty("webdriver.chrome.driver","./src/main/resources/chromedriver.exe");
+		WebDriver driver= new ChromeDriver(options);
 		driver.manage().window().maximize();
 		driver.get(url);
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
@@ -95,12 +98,21 @@ public class Creating_Monthly_ToDo_All_DataTest {
 		sd.clear();
 		sd.sendKeys(startdate);
 		
+		//Select Start Date
+		driver.findElement(By.xpath("//td[text()='December, 2023']/ancestor::thead/child::tr[@class=\"headrow\"]/td[text()='Today']/parent::tr/following-sibling::tr/child::td[text()='Wed']/ancestor::table/child::tbody/child::tr/td[text()='6']")).click();
+//		driver.findElement(By.id("jscal_trigger_task_due_date")).click();
+//		WebElement ed=driver.findElement(By.xpath("//input[@id='task_due_date']"));
+//		ed.clear();
+//		ed.sendKeys("2023-10-28");		
+		
 		/*//Select End Date
 		driver.findElement(By.id("jscal_trigger_task_due_date")).click();
 		driver.findElement(By.xpath("//div[@class='calendar']/descendant::td[contains(text(),'August, 2023')]/../../following-sibling::tbody//tr[2]//td[contains(text(),'10')]")).click();*/
 		
 		//Click on Save Button
-		driver.findElement(By.name("todosave")).click();
+		//driver.navigate().refresh();
+		//Thread.sleep(2000);
+		driver.findElement(By.xpath("(//input[@alt='Save [Alt+S]'])[2]")).click();
 		Thread.sleep(3000);
 		
 		//validating the page is opened or not

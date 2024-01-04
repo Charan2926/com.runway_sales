@@ -4,64 +4,73 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.mysql.cj.jdbc.Driver;
 
 public class DataBaseUtility {
-
-	Connection con =null;
+    Driver driverRef;
+	Connection con;
 	
 	/**
-	 * This method is used to connect to the Database
-	 * @author Nani
+	 * This method is used to connect to the database
+	 * @throws Throwable
+	 */
+	public void connectToDb() throws Throwable  {
+		driverRef = new Driver();
+		DriverManager.registerDriver(driverRef);
+		con =DriverManager.getConnection(IPathconstants.dbURL ,IPathconstants.dbUsername, IPathconstants.dbPassword);			
+	}	
+	
+	
+	/**
+	 * This Method is used to dis-connect from the Database
 	 * @throws SQLException
 	 */
-	public void connectToDB() throws SQLException {
-		Driver driver=new Driver();
-		DriverManager.registerDriver(driver);
-		con=DriverManager.getConnection(IPathconstants.dbURL,IPathconstants.dbUsername,IPathconstants.dbPassword);
-		
+	public void disConnectFromDb() throws SQLException {
+		con.close();
 	}
+	
 	/**
-	 * This method is used to Execute and fetch the data from Databse
-	 * @author Nani
+	 * This method is used to validate the data that is created in the database
 	 * @param query
-	 * @param columnNo
-	 * @param ExpData
+	 * @param index
+	 * @param expdata
 	 * @return
 	 * @throws SQLException
 	 */
-	public String ExecuteQueryAndGetData(String query,int columnNo,String ExpData) throws SQLException {
-		ResultSet result =con.createStatement().executeQuery(query);
+	public String readDataFromDbVAlidate(String query,int index ,String expdata) throws SQLException {
 		
-		boolean flag=false;
+		ResultSet result = con.createStatement().executeQuery(query);
+		
+		Boolean flag = false;
 		while(result.next()) 
 		{
-			String data = result.getString(columnNo);
-			if(data.equalsIgnoreCase(ExpData)) 
+			if(result.getString(index).equalsIgnoreCase(expdata)) 
 			{
 				flag=true;
 				break;
 			}
 		}
-		if(flag==true) 
+		if(flag) 
 		{
-			System.out.println("---Data is vadlidated successfully");
-			return ExpData;
+			System.out.println("Data is verified");
+			return expdata;
 		}
-		else
+		else 
 		{
-			System.out.println("---Data is vadlidation failed");
-			return "";
+			System.out.println("Data is not present");	
 		}
+		return "";
 	}
 	
 	/**
-	 * This method is used to close the Database Connection
-	 * @author Nani
-	 * @throws SQLException
+	 * This method is used to fetch the data from database
+	 * @param query
+	 * @return 
+	 * @return
+	 * @throws Throwable
 	 */
-	public void CloseDb() throws SQLException {
-		con.close();
-	}
+	public ResultSet fetchDataFromDataBase(String query) throws Throwable {
+		ResultSet result =con.createStatement().executeQuery(query);
+		return result;	
+   }
 }

@@ -18,8 +18,7 @@ public class LoginPage {
     private WebElement loginbutton;
     
     //Intialiazation
-    
-    public LoginPage(WebDriver driver) {
+     public LoginPage(WebDriver driver) {
     	PageFactory.initElements(driver, this);
     }
 

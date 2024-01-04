@@ -7,7 +7,7 @@ import com.crm.ObjectRepository.CampaignsPage;
 import com.crm.ObjectRepository.Homepage;
 import com.crmGenericUtility.BaseClass;
 
-@Listeners(com.crmGenericUtility.ExtendsReportClass.class)
+@Listeners(com.crmGenericUtility.Listners_ImplementationClass.class)
 public class Navigate_To_Campaigns_Test extends BaseClass {
 	
 	@Test
@@ -17,7 +17,7 @@ public class Navigate_To_Campaigns_Test extends BaseClass {
 		//click on campaigns link through morebtnlink
 		Homepage hp = new Homepage(driver);
 		hp.clickonMore(driver);
-		//fail();
+		fail();
 		hp.clickonCamp();
 		
 		

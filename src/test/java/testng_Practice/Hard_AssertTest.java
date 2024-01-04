@@ -19,11 +19,11 @@ public class Hard_AssertTest {
 	@Test
 	public void demo1()
 	{
-		System.out.println("-----------step1-------------");
-		System.out.println("-----------step2-------------");
-		Assert.assertEquals("a", "b", "Error in the code");
-		System.out.println("-----------step3-------------");
-		System.out.println("-----------step4-------------");
-		System.out.println("-----------step5-------------");
+		String s="hi";
+		String s1="hi";
+		Assert.assertEquals(s,s1);
+		System.out.println(s);
+		System.out.println(s1);
+		System.out.println(s+s1);
   }
 }

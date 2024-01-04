@@ -2,7 +2,9 @@ package testng_Practice;
 
 import org.testng.annotations.Test;
 
-public class Running_Muliple_TestsTest {
+import com.crmGenericUtility.BaseClass;
+
+public class Running_Muliple_TestsTest extends BaseClass {
 	@Test
 	public void createdata() {
 		System.out.println("-------------Data is creted------------");

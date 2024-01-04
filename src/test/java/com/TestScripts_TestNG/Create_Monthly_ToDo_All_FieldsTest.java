@@ -7,7 +7,7 @@ import com.crm.ObjectRepository.CalendarPage;
 import com.crm.ObjectRepository.Homepage;
 import com.crmGenericUtility.BaseClass;
 
-//@Listeners(com.crmGenericUtility.ExtendsReportClass.class)
+@Listeners(com.crmGenericUtility.Listners_ImplementationClass.class)
 public class Create_Monthly_ToDo_All_FieldsTest extends BaseClass{
 	
 	@Test(groups = "system")
@@ -35,6 +35,8 @@ public class Create_Monthly_ToDo_All_FieldsTest extends BaseClass{
 			
 	//validation of created todo 
 	cp.validate("Calendar");
+	
+	hp.logout(driver);
 			
 	}
 

@@ -40,12 +40,12 @@ public class ExtendsReportClass implements ITestListener{
 		String fscript=result.getMethod().getMethodName();
 		String failedscript = fscript+ new JavaUtility().GetSystemDateInFormat();
 		
-		EventFiringWebDriver edriver = new EventFiringWebDriver(BaseClass.driver);
-		File src = edriver.getScreenshotAs(OutputType.FILE);
+		//EventFiringWebDriver edriver = new EventFiringWebDriver(BaseClass.driver);
+		//File src = edriver.getScreenshotAs(OutputType.FILE);
 		File Dest = new File("./Screenshots/"+failedscript+".png");
 		try 
 		{
-			FileUtils.copyFile(src, Dest);
+			//FileUtils.copyFile(src, Dest);
 		} 
 		catch (Exception e) 
 		{

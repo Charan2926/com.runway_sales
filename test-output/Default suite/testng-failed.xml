@@ -3,15 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.TestScripts_TestNG.Create_Monthly_ToDo_All_FieldsTest">
+      <class name="interview_practice.SpiceJet_Assignment">
         <methods>
-          <include name="config_BM"/>
-          <include name="config_AM"/>
-          <include name="config_BC"/>
-          <include name="monthlyTodoAllFields"/>
-          <include name="config_AC"/>
+          <include name="SelectMinFlight"/>
         </methods>
-      </class> <!-- com.TestScripts_TestNG.Create_Monthly_ToDo_All_FieldsTest -->
+      </class> <!-- interview_practice.SpiceJet_Assignment -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
